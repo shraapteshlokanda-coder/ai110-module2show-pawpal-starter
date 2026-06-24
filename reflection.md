@@ -4,8 +4,18 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+Three core actions a user should be able to perform:
+
+- Add a pet and owner profile so the system knows who is responsible for care.
+- Add or edit pet care tasks with duration and priority so the schedule can reflect real needs.
+- Generate and view a daily care plan that orders tasks based on available time and priority.
+
+I designed four main classes:
+
+- `Owner`: stores owner information, available daily time, preferences, and pets.
+- `Pet`: stores pet details and a list of associated care tasks.
+- `Task`: stores task metadata such as title, duration, priority, preferred time, and completion state.
+- `PawPalScheduler`: generates a daily plan for a pet and explains why tasks were chosen.
 
 **b. Design changes**
 

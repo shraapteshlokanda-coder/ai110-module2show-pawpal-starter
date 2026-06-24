@@ -1,0 +1,43 @@
+classDiagram
+    class Owner {
+        +String name
+        +int available_minutes_per_day
+        +dict preferences
+        +list~Pet~ pets
+        +add_pet(pet)
+        +remove_pet(pet_name)
+        +find_pet(pet_name)
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +int age
+        +list~Task~ tasks
+        +add_task(task)
+        +remove_task(title)
+        +update_task(title, **kwargs)
+        +list_tasks()
+    }
+
+    class Task {
+        +String title
+        +int duration_minutes
+        +String priority
+        +String description
+        +String preferred_time
+        +bool completed
+        +summary()
+        +priority_score()
+    }
+
+    class PawPalScheduler {
+        +Owner owner
+        +generate_daily_plan(pet_name, date)
+        +explain_plan(tasks)
+    }
+
+    Owner --> "0..*" Pet : owns
+    Pet --> "0..*" Task : has
+    PawPalScheduler --> Owner : uses
+    PawPalScheduler --> Pet : schedules
