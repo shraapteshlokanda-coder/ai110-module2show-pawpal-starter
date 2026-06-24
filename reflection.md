@@ -1,17 +1,13 @@
 # PawPal+ Project Reflection
 
 ## 1. System Design
-
-**a. Initial design**
-
 Three core actions a user should be able to perform:
-
 - Add a pet and owner profile so the system knows who is responsible for care.
 - Add or edit pet care tasks with duration and priority so the schedule can reflect real needs.
 - Generate and view a daily care plan that orders tasks based on available time and priority.
 
+**a. Initial design**
 I designed four main classes:
-
 - `Owner`: stores owner information, available daily time, preferences, and pets.
 - `Pet`: stores pet details and a list of associated care tasks.
 - `Task`: stores task metadata such as title, duration, priority, preferred time, and completion state.
@@ -21,6 +17,8 @@ I designed four main classes:
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+
+I kept the model focused on four classes, and didn't need to mke any implementations yet. I think I should be able to add the relationships and complexity within the actual methods. 
 
 ---
 
