@@ -102,25 +102,14 @@ Sample test output:
 Follow these steps to try the app locally and see the scheduler behaviors:
 
 1. Start the Streamlit UI:
-
-```bash
-streamlit run app.py
-```
-
 2. Add an owner name, then add a pet using the "Add pet" button.
-
 3. Use the task inputs to add tasks for your pet(s). You can set a `preferred_time` and (optionally) a `due_date` if you modify the inputs to include them — the scheduler will prefer tasks by time and date.
-
 4. In the "Build Schedule" area choose a date and a pet filter (or "All"). Click "Generate schedule" to run the scheduler.
-
 	- If two tasks share the same `preferred_time` and `due_date`, the UI displays a clear warning using `st.warning()`.
 	- The schedule table shows tasks ordered by priority and time, with columns for pet, title, duration, priority, time, date, and completion state.
+5. Mark a recurring task complete  and the system will automatically create the next occurrence for the following day or week depending on the task `frequency`.
 
-5. Mark a recurring task complete via the backend (or by calling `Pet.mark_task_complete()` in `main.py`) and the system will automatically create the next occurrence for the following day or week depending on the task `frequency`.
-
-Sample CLI output from `python -m main` (example):
-
-```text
+Sample Output:
 All tasks (unsorted):
 - Dinner (15 min) [priority: medium] @ 19:00 on 2026-06-30
 - Morning walk (30 min) [priority: high] @ 08:00 on 2026-06-30
@@ -136,4 +125,4 @@ Conflicts detected:
 Total scheduled time: 50 minutes
 ```
 
-This walkthrough demonstrates sorting by priority/time, detection of same-time conflicts, and recurring task creation.
+
