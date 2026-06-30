@@ -103,12 +103,54 @@ st.divider()
 st.subheader("Build Schedule")
 st.caption("This button should call your scheduling logic once you implement it.")
 
+# Scheduling controls
+col_date, col_pet, col_show = st.columns(3)
+with col_date:
+    selected_date = st.date_input("Schedule date", value=None)
+    # If user didn't pick, use today
+    if selected_date is None:
+        from datetime import date as _d
+        selected_date = _d.today()
+with col_pet:
+    pet_options = ["All"] + [p.name for p in owner.pets]
+    pet_filter = st.selectbox("Pet filter", pet_options)
+with col_show:
+    include_completed = st.checkbox("Include completed", value=False)
+
+scheduler = PawPalScheduler(owner)
+
 if st.button("Generate schedule"):
-    scheduler = PawPalScheduler(owner)
-    plan = scheduler.generate_daily_plan()
+    # Gather tasks according to filters
+    all_tasks = owner.all_tasks(include_completed=include_completed)
+
+    # Detect conflicts and show warnings
+    conflicts = scheduler.detect_conflicts(all_tasks)
+    if conflicts:
+        for c in conflicts:
+            st.warning(c)
+
+    # Optionally filter by pet
+    pet_name = None if pet_filter == "All" else pet_filter
+
+    # Generate plan for the selected date
+    plan = scheduler.generate_daily_plan(pet_name=pet_name, date=selected_date.isoformat())
+
     if not plan:
         st.info("No tasks scheduled — either none exist or they don't fit available time.")
     else:
         st.subheader("Today's Plan")
+        # Build a table-friendly list of dicts
+        rows = []
         for t in plan:
-            st.write(f"- {t.summary()} (pet: {t.pet_name})")
+            rows.append({
+                "pet": t.pet_name,
+                "title": t.title,
+                "duration": t.duration_minutes,
+                "priority": t.priority,
+                "time": t.preferred_time or "-",
+                "date": t.due_date.isoformat() if t.due_date else "-",
+                "completed": t.completed,
+            })
+        st.table(rows)
+
+        st.success(f"Generated {len(plan)} tasks for {selected_date.isoformat()}.")
