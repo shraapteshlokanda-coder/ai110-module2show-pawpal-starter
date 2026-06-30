@@ -33,6 +33,7 @@ I kept the model focused on four classes, and didn't need to mke any implementat
 
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
+One tradeoff: the scheduler detects conflicts only when tasks have the exact same `preferred_time` and `due_date`, rather than checking for overlapping time intervals. This simplifies the implementation and keeps conflict detection lightweight and fast, but it can miss overlaps where one task runs into another (for example, a 30-minute task at 08:30 overlapping a 15-minute task at 08:45). For the scope of this project — a simple daily planner for busy owners — exact-time matching provides useful warnings without adding scheduling complexity (slot management, interval math, or calendar integration). If needed, the next iteration can add interval-based overlap checks.
 
 ---
 

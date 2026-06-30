@@ -75,10 +75,10 @@ Sample test output:
 
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Task sorting | `PawPalScheduler.sort_by_time()` plus priority-based selection in `generate_daily_plan()` | Primary selection by priority/duration; displayed ordered by time (HH:MM). |
+| Filtering | `PawPalScheduler.filter_tasks()` | Filter by `pet_name` and `include_completed` flags. |
+| Conflict handling | `PawPalScheduler.detect_conflicts()` | Lightweight detection of tasks sharing the same date and time; returns warnings. |
+| Recurring tasks | `Task.frequency` + `Task.mark_complete()` + `Pet.mark_task_complete()` | When a recurring task is completed, a new instance for the next occurrence is created automatically. |
 
 ## 📸 Demo Walkthrough
 
