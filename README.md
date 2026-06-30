@@ -57,11 +57,28 @@ Total scheduled time: 75 minutes
 
 ```bash
 # Run the full test suite:
-pytest
+python -m pytest
 
 # Run with coverage:
 pytest --cov
 ```
+
+### Testing PawPal+
+
+Run the automated tests that verify sorting, recurring tasks, and conflict detection:
+
+```bash
+python -m pytest
+```
+
+Sample successful test output from my run:
+
+```text
+.....                                                                    [100%]
+5 passed in 0.01s
+```
+
+**Confidence Level:** ⭐⭐⭐⭐☆ (4/5) — Core behaviors are covered (sorting, recurrence, conflict detection); more edge-case and stress tests could further raise confidence.
 
 Sample test output:
 
